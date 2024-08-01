@@ -6,6 +6,7 @@ import { PerformanceTestComponent } from '../performance-test/performance-test.c
 import { SecurityTestComponent } from '../security-test/security-test.component';
 import { DisplayTestComponent } from '../display-test/display-test.component';
 import { WebApisTestComponent } from '../web-apis-test/web-apis-test.component';
+import { AccessibilityTestComponent } from '../accessibility-test/accessibility-test.component';
 @Component({
   selector: 'app-bat-test',
   standalone: true,
@@ -16,7 +17,8 @@ import { WebApisTestComponent } from '../web-apis-test/web-apis-test.component';
     PerformanceTestComponent,
     SecurityTestComponent,
     DisplayTestComponent,
-    WebApisTestComponent
+    WebApisTestComponent,
+    AccessibilityTestComponent
   ],
   templateUrl: './bat-test.component.html',
   styleUrl: './bat-test.component.scss',
