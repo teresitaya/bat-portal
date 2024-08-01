@@ -42,12 +42,27 @@ export class WebApisTestComponent implements OnInit {
     return 'Notification' in window && 'serviceWorker' in navigator;
   }
 
-  getWebApisInfo() {
+  async checkPersistence() {
+    if (navigator.storage && navigator.storage.persist) {
+        const isPersisted = await navigator.storage.persisted();
+        if (!isPersisted) {
+            const isPersistent = await navigator.storage.persist();
+            return isPersistent ? 'Data is now persistent' : 'Failed to enable persistent storage';
+        } else {
+            return 'Data is already persistent';
+        }
+    } else {
+        return 'Persistence API is not supported in this browser';
+    }
+  }
+
+  async getWebApisInfo() {
     const geolocation = this.isGeolocationAvailable();
     const webRTC = this.isWebRTCAvailable();
     const webGL = this.isWebGLAvailable();
     const webAssembly = this.isWebAssemblyAvailable();
     const pushNotifications = this.arePushNotificationsAvailable();
+    const persistence = await this.checkPersistence();
 
     this.webApisInfo = {
       geolocation,
@@ -55,6 +70,7 @@ export class WebApisTestComponent implements OnInit {
       webGL,
       webAssembly,
       pushNotifications,
+      persistence,
     };
   }
 

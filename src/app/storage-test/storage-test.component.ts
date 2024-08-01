@@ -27,9 +27,10 @@ export class StorageTestComponent implements OnInit {
     return cookiesEnabled;
   }
 
-  getStorageInformation() {
+  async getStorageInformation() {
     const localStorageAvailable = this.isLocalStorageAvailable();
     const sessionStorageAvailable = this.isSessionStorageAvailable();
+    const quotaInformation = await this.getQuotaManagement();
     const indexedDBAvailable = this.isIndexedDBAvailable();
     const cookiesAllowed = this.areCookiesEnabled();
     let localStorageSpace;
@@ -45,6 +46,7 @@ export class StorageTestComponent implements OnInit {
       sessionStorageAvailable,
       localStorageSpace,
       sessionStorageSpace,
+      quotaInformation,
       cookiesAllowed,
       indexedDBAvailable
     };
@@ -82,4 +84,20 @@ export class StorageTestComponent implements OnInit {
   isIndexedDBAvailable() {
     return 'indexedDB' in window;
   }
+
+  async getQuotaManagement() {
+    if (navigator.storage && navigator.storage.estimate) {
+        const estimate = await navigator.storage.estimate();
+        const quota = estimate.quota || 0; // Total storage quota in bytes
+        const usage = estimate.usage || 0; // Used storage in bytes
+
+        return {
+            quota : quota + ' bytes',
+            usage : usage + ' bytes',
+            usagePercentage: (usage / quota * 100).toFixed(5) + '%'
+        };
+    } else {
+        return null;
+    }
+}
 }
