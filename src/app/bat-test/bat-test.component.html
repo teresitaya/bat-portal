@@ -1,1 +1,33 @@
-<p>bat-test works!</p>
+<div class="flex flex-column align-content-center justify-content-center gap-2 px-8 py-2">
+
+    <div class="flex flex-row align-content-start justify-content-between">
+         <h1 class="text-2xl font-bold m-0">BAT Test</h1>
+         @if (!testIsRunning) {
+            <div class="card flex justify-content-center">
+                <button (click)="runTest()"
+                    pButton 
+                    pRipple 
+                    label="Run Test">
+                </button>
+            </div>
+        }
+    </div>
+    @if (testIsRunning) {
+        <div class="flex flex-column items-center justify-start gap-2">
+            <h2 class="text-xl font-bold">Test is running...</h2>
+            <div class="spinner"></div>
+        </div>
+    }@else if (testIsFinished) {
+        <pre class="max-w-30rem" style="text-wrap: wrap">
+            Browser Information: {{browserInformation}}
+         </pre>
+        <pre>
+          Network Information:  {{networkInformation | json}}
+        </pre>
+        <app-storage-test></app-storage-test>
+
+        <pre>
+            Service Worker Information: {{serviceWorkerInformation | json}}
+        </pre>
+    }
+</div>
