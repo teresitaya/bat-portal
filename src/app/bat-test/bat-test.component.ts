@@ -1,6 +1,8 @@
 import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { StorageTestComponent } from '../storage-test/storage-test.component';
 import { PerformanceTestComponent } from '../performance-test/performance-test.component';
 import { SecurityTestComponent } from '../security-test/security-test.component';
@@ -12,7 +14,9 @@ import { TimezoneTestComponent } from '../timezone-test/timezone-test.component'
   selector: 'app-bat-test',
   standalone: true,
   imports: [
+    ToolbarModule,
     ButtonModule,
+    ScrollPanelModule,
     JsonPipe,
     StorageTestComponent,
     PerformanceTestComponent,
