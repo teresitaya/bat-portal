@@ -5,6 +5,7 @@ import { StorageTestComponent } from '../storage-test/storage-test.component';
 import { PerformanceTestComponent } from '../performance-test/performance-test.component';
 import { SecurityTestComponent } from '../security-test/security-test.component';
 import { DisplayTestComponent } from '../display-test/display-test.component';
+import { WebApisTestComponent } from '../web-apis-test/web-apis-test.component';
 @Component({
   selector: 'app-bat-test',
   standalone: true,
@@ -14,7 +15,8 @@ import { DisplayTestComponent } from '../display-test/display-test.component';
     StorageTestComponent,
     PerformanceTestComponent,
     SecurityTestComponent,
-    DisplayTestComponent
+    DisplayTestComponent,
+    WebApisTestComponent
   ],
   templateUrl: './bat-test.component.html',
   styleUrl: './bat-test.component.scss',
@@ -30,7 +32,7 @@ export class BatTestComponent {
     this.testIsRunning = true;
     this.testIsFinished = false;
     this.getBrowserInformation();
-    //await this.getNetworkInfo();
+    await this.getNetworkInfo();
     this.checkServiceWorker();
     setTimeout(() => {
       this.testIsRunning = false;
