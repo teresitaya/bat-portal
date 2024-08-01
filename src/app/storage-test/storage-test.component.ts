@@ -31,21 +31,21 @@ export class StorageTestComponent implements OnInit {
     const localStorageAvailable = this.isLocalStorageAvailable();
     const sessionStorageAvailable = this.isSessionStorageAvailable();
     const indexedDBAvailable = this.isIndexedDBAvailable();
-    const cookies = this.areCookiesEnabled();
-    let localStorageSpace = 0;
-    let sessionStorageSpace = 0;
+    const cookiesAllowed = this.areCookiesEnabled();
+    let localStorageSpace;
+    let sessionStorageSpace;
     if (localStorageAvailable) {
-      localStorageSpace = this.getStorageSpace(localStorage);
+      localStorageSpace = (this.getStorageSpace(localStorage) || 0) + ' bytes';
     }
     if (sessionStorageAvailable) {
-      sessionStorageSpace = this.getStorageSpace(sessionStorage);
+      sessionStorageSpace = (this.getStorageSpace(sessionStorage) || 0) + ' bytes';
     }
     this.storageInformation = {
       localStorageAvailable,
       sessionStorageAvailable,
       localStorageSpace,
       sessionStorageSpace,
-      cookies,
+      cookiesAllowed,
       indexedDBAvailable
     };
   }

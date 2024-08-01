@@ -26,7 +26,6 @@ export class PerformanceTestComponent implements OnInit {
 }
 
 private getNavigationTiming() {
-  console.log('performance', performance);
     if (performance.getEntriesByType) {
         const [navigationEntry] = performance.getEntriesByType('navigation');
         if (navigationEntry) {
@@ -38,16 +37,16 @@ private getNavigationTiming() {
 
 getPerformanceInformation() {
     this.performanceInformation = {
-        pageLoadTime: this.getPageLoadTime(),
-        navigationTiming: this.getNavigationTiming()
+        pageLoadTime: this.getPageLoadTime() ? this.getPageLoadTime() + ' ms' : 'N/A',
+        navigationTiming: this.getNavigationTiming() ? this.getNavigationTiming() + ' ms' : 'N/A'
     };
   }
   
   getMemoryInfo() {
     this.memoryInfo = {
-      totalJSHeapSize: (performance as any).memory.totalJSHeapSize,
-      usedJSHeapSize: (performance as any).memory.usedJSHeapSize,
-      jsHeapSizeLimit: (performance as any).memory.jsHeapSizeLimit
+      totalJSHeapSize: (performance as any).memory.totalJSHeapSize + ' bytes',
+      usedJSHeapSize: (performance as any).memory.usedJSHeapSize + ' bytes',
+      jsHeapSizeLimit: (performance as any).memory.jsHeapSizeLimit + ' bytes'
     };
   }
 }
