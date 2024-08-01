@@ -18,16 +18,17 @@
             <div class="spinner"></div>
         </div>
     }@else if (testIsFinished) {
-        <pre class="max-w-30rem" style="text-wrap: wrap">
+        <pre class="max-w-30rem bg-primary-reverse" style="text-wrap: wrap">
             Browser Information: {{browserInformation}}
          </pre>
-        <pre>
+        <pre class="bg-primary-reverse">
           Network Information:  {{networkInformation | json}}
         </pre>
         <app-storage-test></app-storage-test>
 
-        <pre>
+        <pre class="bg-primary-reverse">
             Service Worker Information: {{serviceWorkerInformation | json}}
         </pre>
+      <app-performance-test></app-performance-test>
     }
 </div>

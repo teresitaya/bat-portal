@@ -2,10 +2,11 @@ import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { StorageTestComponent } from '../storage-test/storage-test.component';
+import { PerformanceTestComponent } from '../performance-test/performance-test.component';
 @Component({
   selector: 'app-bat-test',
   standalone: true,
-  imports: [ButtonModule, JsonPipe, StorageTestComponent],
+  imports: [ButtonModule, JsonPipe, StorageTestComponent, PerformanceTestComponent],
   templateUrl: './bat-test.component.html',
   styleUrl: './bat-test.component.scss',
 })
@@ -15,7 +16,7 @@ export class BatTestComponent {
   browserInformation: any;
   networkInformation: any;
   serviceWorkerInformation: any;
- 
+
 
   async runTest() {
     this.testIsRunning = true;
@@ -63,21 +64,25 @@ export class BatTestComponent {
 
   private isServiceWorkerSupported() {
     return 'serviceWorker' in navigator;
-}
+  }
 
-private areServiceWorkersRegistered() {
+  private areServiceWorkersRegistered() {
     if ('serviceWorker' in navigator) {
-        return navigator.serviceWorker.getRegistrations().then((registrations) => {
-            return registrations.length > 0;
+      return navigator.serviceWorker
+        .getRegistrations()
+        .then((registrations) => {
+          return registrations.length > 0;
         });
     }
     return Promise.resolve(false);
-}
+  }
 
   async checkServiceWorker() {
     this.serviceWorkerInformation = {
       serviceWorkerSupported: this.isServiceWorkerSupported(),
-      serviceWorkersRegistered: await this.areServiceWorkersRegistered() + ' (is returning always false)',
+      serviceWorkersRegistered:
+        (await this.areServiceWorkersRegistered()) +
+        ' (is returning always false)',
     };
   }
 
