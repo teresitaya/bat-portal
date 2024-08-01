@@ -3,10 +3,19 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { StorageTestComponent } from '../storage-test/storage-test.component';
 import { PerformanceTestComponent } from '../performance-test/performance-test.component';
+import { SecurityTestComponent } from '../security-test/security-test.component';
+import { DisplayTestComponent } from '../display-test/display-test.component';
 @Component({
   selector: 'app-bat-test',
   standalone: true,
-  imports: [ButtonModule, JsonPipe, StorageTestComponent, PerformanceTestComponent],
+  imports: [
+    ButtonModule,
+    JsonPipe,
+    StorageTestComponent,
+    PerformanceTestComponent,
+    SecurityTestComponent,
+    DisplayTestComponent
+  ],
   templateUrl: './bat-test.component.html',
   styleUrl: './bat-test.component.scss',
 })
@@ -16,7 +25,6 @@ export class BatTestComponent {
   browserInformation: any;
   networkInformation: any;
   serviceWorkerInformation: any;
-
 
   async runTest() {
     this.testIsRunning = true;
@@ -85,6 +93,4 @@ export class BatTestComponent {
         ' (is returning always false)',
     };
   }
-
- 
 }
