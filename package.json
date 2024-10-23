@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration production",
     "server": "ts-node -P ./server/server.tsconfig.json ./server/server.ts",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
