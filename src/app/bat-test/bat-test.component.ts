@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
@@ -35,6 +35,7 @@ export class BatTestComponent {
   browserInformation: any;
   networkInformation: any;
   serviceWorkerInformation: any;
+  serviceWorker: any;
 
   async runTest() {
     this.testIsRunning = true;
@@ -42,14 +43,19 @@ export class BatTestComponent {
     this.getBrowserInformation();
     await this.getNetworkInfo();
     this.checkServiceWorker();
+    this.testServiceWorker();
     setTimeout(() => {
       this.testIsRunning = false;
       this.testIsFinished = true;
     }, 500);
   }
 
-  getBrowserInformation() {
-    this.browserInformation = navigator.userAgent;
+  async getBrowserInformation() {
+    const incognito = await this.isIncognito();
+    this.browserInformation = {
+      userAgent: navigator.userAgent,
+      incognito
+    }
   }
 
   async getNetworkInfo() {
@@ -103,4 +109,25 @@ export class BatTestComponent {
         ' (is returning always false)',
     };
   }
+
+  isIncognito() {
+    return new Promise((resolve) => {
+        const fs = (window as any).RequestFileSystem || (window as any).webkitRequestFileSystem;
+        if (!fs) {
+            resolve(false); // FileSystem API is not supported, can't determine incognito mode
+            return;
+        }
+        fs((window as any).TEMPORARY, 100, () => resolve(false), () => resolve(true));
+    });
+}
+
+testServiceWorker(){
+  this.serviceWorker = new Worker('/public/bat-test-sw.js');
+      this.serviceWorker.postMessage('start');
+      this.serviceWorker.onmessage = (message: any) => {
+          console.log('serviceWorker', message)
+      };
+    } catch (error: any) {
+      console.error(error);
+}
 }

@@ -1,0 +1,40 @@
+<div class="flex flex-column gap-6 px-8 py-12">
+    <h1>
+        Microsoft 365 Test
+    </h1>
+   
+
+    <div class="flex gap-4">
+        <button
+        (click)="authorize()"
+        [disabled]="authorizing"
+        pButton pRipple label="Authorize"
+        >
+        
+        </button>
+        @if(tenantId){
+             <pre>
+            tenantId: {{ tenantId }}
+        </pre>
+        }
+    </div>
+    <div>
+        <button
+(click)="grantAdminConsent()"
+
+pButton pRipple label="Grant admin consent"
+>
+</button>
+    </div>
+
+
+
+    <div>
+        <button
+(click)="getServices()"
+
+pButton pRipple label="Get services"
+>
+</button>
+    </div>
+</div>
