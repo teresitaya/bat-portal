@@ -1,0 +1,11 @@
+<div class="flex flex-colum align-items-center justify-content-center min-h-screen h-full">
+<form class="flex flex-column gap-2 align-items-start justify-content-start border-1 border-gray-800 border-round-2xl pt-2 pb-6 px-8" [formGroup]="authForm" novalidate>
+    <h2 class="text-2xl text-center w-full">Auth Flow</h2>
+    <div class="flex flex-column gap-4">
+        <input type="email" pInputText formControlName="email" />
+        <p-password formControlName="password" [feedback]="false" />
+    </div>
+    <button (click)="login()" class="w-full mt-2" pButton pRipple label="Login"></button>
+</form>
+
+</div>
