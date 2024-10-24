@@ -25,4 +25,4 @@ jobs:
         with:
           folder: dist/bat-portal/browser
           branch: prod  
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GH_TOKEN_BAT }}
