@@ -12,7 +12,8 @@
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'none'; script-src 'self';
-    style-src 'self';
+    style-src 'self' 
+    'unsafe-inline';
     img-src 'self';
     font-src 'self';
     connect-src 'self';
@@ -27,7 +28,7 @@
     <meta name="referrer" content="no-referrer" />
     <meta name="X-XSS-Protection" content="1; mode=block" />
     <meta name="X-Content-Type-Options" content="nosniff" />
-    <meta name="X-Frame-Options" content="DENY" />
+  <!--   <meta name="X-Frame-Options" content="DENY" /> -->
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
   </head>
   <body>
